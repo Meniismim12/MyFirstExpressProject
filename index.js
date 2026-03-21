@@ -26,6 +26,7 @@ try {
 	res.status(500).json({ error: error.message })
 }
 })
+//heayy 
 
 app.delete('/:id', (req, res) => {
 	const { id } = req.params
