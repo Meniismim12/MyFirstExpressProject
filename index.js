@@ -4,41 +4,20 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
 const postModel = require('./models/post.model')	
+const router = require('./routes/post.route')
 const app = express()
 
 app.use(express.json())
 
-app.get('/', async (req, res) => {
-	try {
-		const posts = await postModel.find()
-		res.json(posts)
-	} catch (error) {
-		res.status(500).json({ error: error.message })
-	}
-})
+// app.get('/', )
 
-app.post('/', async (req, res) => {
-try {
-		const { body, title } = req.body
- const newPost = await postModel.create({body, title})
-	res.status(201).json(newPost)
-} catch (error) {
-	res.status(500).json({ error: error.message })
-}
-})
-//heayy ada
 
-app.delete('/:id', (req, res) => {
-	const { id } = req.params
-	res.send(id)
-})
+// route
+app.use("/api/post", router)
 
-app.put('/:id', (req, res) => {
-	const { id } = req.params
-	const body = req.body
+app.use("api/post", router)
 
-	res.json({ id, body })
-})
+
 
 const PORT = process.env.PORT || 8080
 const DB_URL = process.env.DB_URL
