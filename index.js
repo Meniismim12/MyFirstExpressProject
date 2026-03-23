@@ -7,16 +7,19 @@ const postModel = require('./models/post.model')
 const router = require('./routes/post.route')
 const app = express()
 
+const fileUpload = require('express-fileupload')
 app.use(express.json())
 
 // app.get('/', )
 
 
 // route
-app.use("/api/post", router)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(fileUpload({}));
+app.use(express.static('static'));
 
-app.use("api/post", router)
-
+app.use("/api/post", router);
 
 
 const PORT = process.env.PORT || 8080

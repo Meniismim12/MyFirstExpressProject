@@ -11,4 +11,5 @@ router.put('/update/:id', postController.update)
 router.get('/get/:id', postController.getOne)
 
 
+
 module.exports = router
