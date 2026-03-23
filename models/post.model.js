@@ -12,6 +12,6 @@ const postSchema = new Schema({
   picture: {
     type: String,
   },
-});
+}, { timestamps: true });
 
 module.exports = model("Post", postSchema);

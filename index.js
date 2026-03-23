@@ -8,12 +8,14 @@ const router = require('./routes/post.route')
 const app = express()
 
 const fileUpload = require('express-fileupload')
+const requireTimer = require('./middlewares/request-time')
 app.use(express.json())
 
 // app.get('/', )
 
 
 // route
+app.use(requireTimer)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload({}));
