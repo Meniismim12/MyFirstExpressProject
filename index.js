@@ -6,13 +6,14 @@ const express = require('express')
 const postModel = require('./models/post.model')	
 const router = require('./routes/post.route')
 const app = express()
+const cookieParser = require('cookie-parser')
 
 const fileUpload = require('express-fileupload')
 const requireTimer = require('./middlewares/request-time')
 app.use(express.json())
 
 // app.get('/', )
-
+//req.cookies - there are a lot method of cookie
 
 // route
 app.use(requireTimer)
@@ -20,6 +21,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload({}));
 app.use(express.static('static'));
+
+app.use(cookieParser({}))
 
 app.use("/api/post", require('./routes/post.route'));
 app.use("/api/auth", require('./routes/auth.route'))

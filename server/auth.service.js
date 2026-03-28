@@ -2,7 +2,7 @@ const { use } = require("bcrypt/promises");
 const userModel = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const UserDto = require("../dtos/user.dtos");
-
+const tokenService = require("./token.service");
 class AutheService {
   async register(email, password) {
     const existingUser = await userModel.findOne({ email });
@@ -15,8 +15,11 @@ class AutheService {
     await newUser.save();
 
     const userDto = new UserDto(newUser);
+    const tokens = tokenService.generateTokens({ ...userDto });
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
-    return {user: userDto};
+
+    return {user: userDto, ...tokens};
   }
 
   async isActivated(userId) {

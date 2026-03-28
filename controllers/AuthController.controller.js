@@ -5,6 +5,8 @@ class AuthController {
     try {
         const {email, password} = req.body
         const Data = await AutheService.register(email, password);
+      res.cookie('refreshToken', Data.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true})
+
         return res.json(Data);
     } catch (error) {
       console.log(`Error in registration: ${error}`);
