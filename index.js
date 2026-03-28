@@ -21,7 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload({}));
 app.use(express.static('static'));
 
-app.use("/api/post", router);
+app.use("/api/post", require('./routes/post.route'));
+app.use("/api/auth", require('./routes/auth.route'))
 
 
 const PORT = process.env.PORT || 8080
